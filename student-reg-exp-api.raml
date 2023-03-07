@@ -1,0 +1,49 @@
+#%RAML 1.0
+title: student-reg-exp-api
+# This API will be used as ...
+# baseUri: https://localhost
+version: 1.0
+types:
+  StudentRegistration: !include /Datatype/Student.raml
+
+/students:
+  get:
+    queryParameters:
+      Studentname:
+        description: Filter By Student Name
+        required: false
+        type: string
+      Student ID:
+        description: Filter By Student ID
+        required: true
+        type: number
+      Grade:
+        description: Filter By Grade
+        required: false
+        enum: [12A, 12B, 12C] 
+    headers:
+      C_ID:
+        required: false
+      C_Secret:
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            type: StudentRegistration[]
+            examples: !include /exchange_modules/45fadf18-bc89-4251-a4af-a809eac1b9fa/students-reg-example/1.0.0/students-reg-example.raml
+      404:
+        body:
+          application/json:
+            example:
+              {
+                "Msg": "Resource Not Found"
+              }
+
+                
+              
+  post:
+  /{StudentID}:
+    get:
+    patch:
+    delete:
